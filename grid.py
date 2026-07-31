@@ -26,17 +26,26 @@ class Grid():
             return True
         return False
 
-    def add_cell(self, cell_position: tuple(int, int)):
-        self.grid_of_cells[cell_position[0]][cell_position[1]].alive = True 
-        for i in range(-1, 1):
-            for j in range(-1, 1):
+    def __getitem__(self, index: tuple[int, int]) -> Cell:
+        return self.grid_of_cells[index[0]][index[1]]
+
+    def add_cell(self, cell_position: tuple[int, int]):
+        self[cell_position].alive = True 
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if i == j == 0:
+                    continue
+                #this will run into an out of index issue, fix
                 self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours += 1
 
-    def delete_cell(self, cell_position: tuple(int, int)):
-        self.grid_of_cells[cell_position[0]][cell_position[1]].alive = False
-        for i in range(-1, 1):
-            for j in range(-1, 1):
-                if self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours >= 0:
+    def delete_cell(self, cell_position: tuple[int, int]):
+        self[cell_position].alive = False
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if i == j == 0:
+                    continue
+                #same here
+                if self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours >= 1:
                     self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours -= 1
 
     def check_neighbour_cells(self):
@@ -45,9 +54,9 @@ class Grid():
         for i in range(self.size_x):
             for j in range(self.size_y):
                 cell = self.grid_of_cells[i][j]
-                if cell.alive and cell.neighbours == 2 or 3:
+                if cell.alive and cell.neighbours == 2 or cell.alive and cell.neighbours == 3:
                     continue
-                elif cell.alive and cell.neighbours > 3 or cell.neighbours <= 1:
+                elif cell.alive and cell.neighbours > 3 or cell.alive and cell.neighbours <= 1:
                     cells_to_delete.append((i, j))
                 elif not cell.alive and cell.neighbours == 3:
                     cells_to_add.append((i, j))
