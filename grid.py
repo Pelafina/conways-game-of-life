@@ -10,10 +10,18 @@ class Grid():
 
     def __eq__(self, other):
         if isinstance(other, Grid):
-            if self == other:
+            if self.grid_of_cells == other.grid_of_cells:
                 return True
             else:
                 return False
+        elif isinstance(other, list):
+            for i in range(self.size_x):
+                for j in range(self.size_y):
+                    if self.grid_of_cells[i][j] == other[i][j]:
+                        continue
+                    else:
+                        return False
+            return True
         elif f"{self}" == other:
             return True
         return False
@@ -34,15 +42,15 @@ class Grid():
     def check_neighbour_cells(self):
         cells_to_delete = []
         cells_to_add = []
-        for x in self.grid_of_cells:
-            for y in self.grid_of_cells:
-                cell = self.grid_of_cells[x][y]
+        for i in range(self.size_x):
+            for j in range(self.size_y):
+                cell = self.grid_of_cells[i][j]
                 if cell.alive and cell.neighbours == 2 or 3:
                     continue
                 elif cell.alive and cell.neighbours > 3 or cell.neighbours <= 1:
-                    cells_to_delete.append((x, y))
+                    cells_to_delete.append((i, j))
                 elif not cell.alive and cell.neighbours == 3:
-                    cells_to_add.append((x, y))
+                    cells_to_add.append((i, j))
 
         for cell in cells_to_add:
             add_cell(cell)

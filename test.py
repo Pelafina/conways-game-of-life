@@ -42,6 +42,7 @@ class GridTest(unittest.TestCase):
         expected_grid_3x3 = [[Cell(), Cell(), Cell()], [Cell(), Cell(), Cell()], [Cell(), Cell(), Cell()]]
         test_grid_3x3 = Grid(3, 3)
         self.assertEqual(expected_grid_3x3, test_grid_3x3)
+        self.assertNotEqual(test_grid_2x2, test_grid_3x3)
 
 
 
