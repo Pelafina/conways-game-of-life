@@ -44,6 +44,27 @@ class GridTest(unittest.TestCase):
         self.assertEqual(expected_grid_3x3, test_grid_3x3)
         self.assertNotEqual(test_grid_2x2, test_grid_3x3)
 
+    def test_add_delete_cells(self):
+        grid1 = Grid(2,2)
+        grid2 = Grid(2,2)
+
+        grid1.add_cell((0,0))
+        self.assertNotEqual(grid1, grid2)
+
+        grid1.delete_cell((0,0))
+        self.assertEqual(grid1, grid2)
+
+    def test_check_neighbours(self):
+        grid1 = Grid(2,2)
+        grid2 = Grid(2,2)
+
+        grid1.add_cell((0,0))
+        self.assertNotEqual(grid1, grid2)
+        grid1.check_neighbour_cells()
+        #cell 0,0 should die, grid 1 and 2 should be equal
+        self.assertEqual(grid1, grid2)
+
+
 
 
 
