@@ -5,13 +5,21 @@ class Grid():
         self.size_y = size_y
         self.list_of_cells = [[Cell() for _ in range(size_y)] for _ in range(size_x)] #creates a 2D array full of 0s that represent a grid of dead cells 
 
-    def add_cell(self, cell_position: tuple(x:int, y:int)):
+    #TODO: add __repr__ and __eq__ methods for unittesting
+
+    def __repr__(self):
+        pass
+
+    def __eq__(self, other):
+        pass
+
+    def add_cell(self, cell_position: tuple(int, int)):
         self.list_of_cells[cell_position[0]][cell_position[1]].alive = True 
         for i in range(-1, 1):
             for j in range(-1, 1):
                 self.list_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours += 1
 
-    def delete_cell(self, cell_position: tuple(x:int, y:int)):
+    def delete_cell(self, cell_position: tuple(int, int)):
         self.list_of_cells[cell_position[0]][cell_position[1]].alive = False
         for i in range(-1, 1):
             for j in range(-1, 1):

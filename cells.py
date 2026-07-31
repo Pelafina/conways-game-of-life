@@ -7,8 +7,4 @@ class Cell():
     def __repr__(self):
         return f"neighbours {self.neighbours}, alive {self.alive}"
     
-    def check_neighbours(self):
-        #if neighbours > 3 die
-        #if neighbours == 2 or 3 live
-        #if !self.alive and neighbours == 3 self.alive = true
     
