@@ -5,7 +5,7 @@ class Cell():
         self.alive = alive 
 
     def __repr__(self):
-            return f"alive {self.alive}, neighbours {self.neighbours}"
+        return f"alive {self.alive}, neighbours {self.neighbours}"
 
     def __eq__(self, other):
         if isinstance(other, Cell):
