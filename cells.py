@@ -5,7 +5,7 @@ class Cell():
         self.alive = alive 
 
     def __repr__(self):
-        return f"pos x: {self.x}, pos y: {self.y}, alive {self.alive}"
+        return f"neighbours {self.neighbours}, alive {self.alive}"
     
     def check_neighbours(self):
         #if neighbours > 3 die
