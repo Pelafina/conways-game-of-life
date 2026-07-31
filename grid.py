@@ -25,7 +25,7 @@ class Grid():
                 cell = self.list_of_cells[x][y]
                 if cell.alive and cell.neighbours == 2 or 3:
                     continue
-                elif cell.alive and cell.neighbours > 3 or cell.neighbours == 1:
+                elif cell.alive and cell.neighbours > 3 or cell.neighbours <= 1:
                     cells_to_delete.append((x, y))
                 elif not cell.alive and cell.neighbours == 3:
                     cells_to_add.append((x, y))
