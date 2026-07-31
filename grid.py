@@ -15,7 +15,8 @@ class Grid():
         self.list_of_cells[cell_position[0]][cell_position[1]].alive = False
         for i in range(-1, 1):
             for j in range(-1, 1):
-                self.list_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours -= 1
+                if self.list_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours >= 0:
+                    self.list_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours -= 1
 
     def check_neighbour_cells(self):
         cells_to_delete = []
