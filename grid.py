@@ -3,7 +3,7 @@ class Grid():
     def __init__(self, size_x:int, size_y:int):
         self.size_x = size_x
         self.size_y = size_y
-        self.list_of_cells = [[Cell() for _ in range(size_y)] Cell() for _ in range(size_x)] #creates a 2D array full of 0s that represent a grid of dead cells 
+        self.list_of_cells = [[Cell() for _ in range(size_y)] for _ in range(size_x)] #creates a 2D array full of 0s that represent a grid of dead cells 
 
     def add_cell(self, cell_position: tuple(x:int, y:int)):
         self.list_of_cells[cell_position[0]][cell_position[1]].alive = True 
@@ -23,11 +23,11 @@ class Grid():
         for x in self.list_of_cells:
             for y in self.list_of_cells:
                 cell = self.list_of_cells[x][y]
-                if cell.neighbours == 2 or 3 and cell.alive:
+                if cell.alive and cell.neighbours == 2 or 3:
                     continue
-                elif cell.neighbours > 3 and cell.alive:
+                elif cell.alive and cell.neighbours > 3 or cell.neighbours == 1:
                     cells_to_delete.append((x, y))
-                elif cell.neighbours == 3 and not cell.alive:
+                elif not cell.alive and cell.neighbours == 3:
                     cells_to_add.append((x, y))
 
         for cell in cells_to_add:
