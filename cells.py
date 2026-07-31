@@ -5,6 +5,20 @@ class Cell():
         self.alive = alive 
 
     def __repr__(self):
-        return f"neighbours {self.neighbours}, alive {self.alive}"
+            return f"alive {self.alive}, neighbours {self.neighbours}"
+
+    def __eq__(self, other):
+        if isinstance(other, Cell):
+            if self.alive == other.alive and self.neighbours == other.neighbours:
+                return True
+            else:
+                return False
+        else:
+            if f"{self}" == other:
+                return True
+            else:
+                return False
+
+
     
     

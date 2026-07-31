@@ -3,35 +3,40 @@ class Grid():
     def __init__(self, size_x:int, size_y:int):
         self.size_x = size_x
         self.size_y = size_y
-        self.list_of_cells = [[Cell() for _ in range(size_y)] for _ in range(size_x)] #creates a 2D array full of 0s that represent a grid of dead cells 
-
-    #TODO: add __repr__ and __eq__ methods for unittesting
+        self.grid_of_cells = [[Cell() for _ in range(size_y)] for _ in range(size_x)] #creates a 2D array full of 0s that represent a grid of dead cells 
 
     def __repr__(self):
-        pass
+        return f"{self.grid_of_cells}"    
 
     def __eq__(self, other):
-        pass
+        if isinstance(other, Grid):
+            if self == other:
+                return True
+            else:
+                return False
+        elif f"{self}" == other:
+            return True
+        return False
 
     def add_cell(self, cell_position: tuple(int, int)):
-        self.list_of_cells[cell_position[0]][cell_position[1]].alive = True 
+        self.grid_of_cells[cell_position[0]][cell_position[1]].alive = True 
         for i in range(-1, 1):
             for j in range(-1, 1):
-                self.list_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours += 1
+                self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours += 1
 
     def delete_cell(self, cell_position: tuple(int, int)):
-        self.list_of_cells[cell_position[0]][cell_position[1]].alive = False
+        self.grid_of_cells[cell_position[0]][cell_position[1]].alive = False
         for i in range(-1, 1):
             for j in range(-1, 1):
-                if self.list_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours >= 0:
-                    self.list_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours -= 1
+                if self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours >= 0:
+                    self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours -= 1
 
     def check_neighbour_cells(self):
         cells_to_delete = []
         cells_to_add = []
-        for x in self.list_of_cells:
-            for y in self.list_of_cells:
-                cell = self.list_of_cells[x][y]
+        for x in self.grid_of_cells:
+            for y in self.grid_of_cells:
+                cell = self.grid_of_cells[x][y]
                 if cell.alive and cell.neighbours == 2 or 3:
                     continue
                 elif cell.alive and cell.neighbours > 3 or cell.neighbours <= 1:
