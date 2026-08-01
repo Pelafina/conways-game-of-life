@@ -29,24 +29,24 @@ class Grid():
     def __getitem__(self, index: tuple[int, int]) -> Cell:
         return self.grid_of_cells[index[0]][index[1]]
 
+    def neighbours(self, cell_position: tuple[int, int]) -> Generator[tuple[int, int]]:
+        x, y = cell_position
+        for i in range(-1, 2):
+            if not 0 <= x + i < len(self.grid_of_cells):
+                continue #skips cells in non-existent rows
+            for j in range(-1, 2):
+                if not 0 <= y + j < len(self.grid_of_cells[x + i]):
+                    yield(x + i, y + j)
+
     def add_cell(self, cell_position: tuple[int, int]):
         self[cell_position].alive = True 
-        for i in range(-1, 2):
-            for j in range(-1, 2):
-                if i == j == 0:
-                    continue
-                #this will run into an out of index issue, fix
-                self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours += 1
+        for neighbour_position in self.neighbours(cell_position):
+            self.grid_of_cells[cell_position[0] + neighbour_position[0]][cell_position[1] + neighbour_position[1]].neighbours += 1
 
     def delete_cell(self, cell_position: tuple[int, int]):
         self[cell_position].alive = False
-        for i in range(-1, 2):
-            for j in range(-1, 2):
-                if i == j == 0:
-                    continue
-                #same here
-                if self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours >= 1:
-                    self.grid_of_cells[cell_position[0] + i][cell_position[1] + j].neighbours -= 1
+        for neighbour_position in self.neighbours(cell_position):
+            self.grid_of_cells[cell_position[0] + neighbour_position[0]][cell_position[1] + neighbour_position[1]].neighbours -= 1
 
     def check_neighbour_cells(self):
         cells_to_delete = []
