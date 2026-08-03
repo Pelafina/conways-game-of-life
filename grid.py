@@ -62,8 +62,8 @@ class Grid():
                     cells_to_add.append((i, j))
 
         for cell in cells_to_add:
-            add_cell(cell)
+            self.add_cell(cell)
         for cell in cells_to_delete:
-            delete_cell(cell)
+            self.delete_cell(cell)
 
 
