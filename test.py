@@ -64,6 +64,20 @@ class GridTest(unittest.TestCase):
         #cell 0,0 should die, grid 1 and 2 should be equal
         self.assertEqual(grid1, grid2)
 
+        grid1.add_cell((0,0))
+        grid1.add_cell((0,1))
+        grid1.add_cell((1,0))
+        #cell 1,1 should turn alive
+        grid1.check_neighbour_cells()
+        grid1_comparison = Grid(2,2)
+        grid1_comparison.add_cell((0,0))
+        grid1_comparison.add_cell((0,1))
+        grid1_comparison.add_cell((1,0))
+        grid1_comparison.add_cell((1,1))
+        self.assertEqual(grid1, grid1_comparison)
+        # grid2.add_cell((1,0))
+
+
 
 
 

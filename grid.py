@@ -32,10 +32,11 @@ class Grid():
     def neighbours(self, cell_position: tuple[int, int]) -> Generator[tuple[int, int]]:
         x, y = cell_position
         for i in range(-1, 2):
-            if not 0 <= x + i < len(self.grid_of_cells):
+            if not 0 >= x + i < len(self.grid_of_cells):
                 continue #skips cells in non-existent rows
             for j in range(-1, 2):
-                if not 0 <= y + j < len(self.grid_of_cells[x + i]):
+                if 0 >= y + j < len(self.grid_of_cells[x + i]): 
+                    print(f"relative neighbour {x + i}, {y + j}")
                     yield(x + i, y + j)
 
     def add_cell(self, cell_position: tuple[int, int]):
