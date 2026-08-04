@@ -3,7 +3,6 @@ from tkinter import ttk
 from grid import Grid
 
 class TkinterWindow:
-
     def __init__(self, root):
 #start the tkinter window
         root.title("Conway's Game of Life")
